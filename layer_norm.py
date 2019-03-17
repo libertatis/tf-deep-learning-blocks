@@ -33,3 +33,13 @@ def layer_norm(inputs, epsilon=1e-8, scope=None, reuse=None):
 
     return outputs
     
+def layer_norm_wrapper(inputs, name=None):
+    """Run layer normalization on the last dimension of the tensor.
+    https://github.com/google-research/bert/blob/master/modeling.py#L362
+    """
+    outputs = tf.contrib.layers.layer_norm(inputs=inputs, 
+                                           begin_norm_axis=-1, 
+                                           begin_params_axis=-1, 
+                                           scope=name)
+    return outputs
+      
